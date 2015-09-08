@@ -24,7 +24,8 @@ function love.update(dt)
 
     	--UPDATE PHYSICS
 
-
+        Ball.Velocity = Ball.Velocity + Vector(0, 9.82)
+        Ball.Position = Ball.Position + Ball.Velocity
     end
 end
  
@@ -34,4 +35,15 @@ function love.draw()
     --love.graphics.rectangle("fill", x, y, w, h)
 
     love.graphics.circle("fill", Ball.Position.x, Ball.Position.y, Ball.Radius, 32)
+end
+
+function love.keypressed(key, isrepeat)
+    if key == "escape" then
+        love.event.quit()
+    end
+
+    if key == "r" then
+        Ball.Position = Vector(0, 0)
+        Ball.Velocity = Vector(0, 0)
+    end
 end
