@@ -1,10 +1,17 @@
 Vector = require('vector')
 
-local InverseMetersPerPixel = 1/5
+-----------------------------------------------------------------
+--                                                             --
+--By: Anton Gustavsson(a10antgu) and Jesper Mathiason(a13jesma)--
+--                                                             --
+-----------------------------------------------------------------
+
+-- all units are in SI units(meters etc)
+local InverseMetersPerPixel = 1/5 --5 on screen pixels per meter
 
 local PhysicsAcc = 0
-local Physics_DT = 1/60
-local Physics_G = -9.82
+local Physics_TIME_STEP = 1/60
+local Physics_G = Vector(0, -9.82)--m/s^2
 local Physics_DAMPENING = 0.0
 local Physics_ELASTICITY = 0.4
 local Physics_FRICTION = 0.15
@@ -26,58 +33,68 @@ function LaunchBall(pos, vel)
     Ball.Velocity = vel or LaunchVelocity
 end
 
--- Load some default values for our rectangle.
 function love.load()
     LaunchBall()
 end
 
--- Increase the size of the rectangle every frame.
 function love.update(dt)
-	require("lurker"):update()
-
     PhysicsAcc = PhysicsAcc + dt
 
-    while PhysicsAcc >= Physics_DT do
-    	PhysicsAcc = PhysicsAcc -  Physics_DT
+    --update the physics each time step, if the dt is larger than Physics_TIME_STEP update more than once
+    while PhysicsAcc >= Physics_TIME_STEP do
+    	PhysicsAcc = PhysicsAcc -  Physics_TIME_STEP
 
-    	--UPDATE PHYSICS
 
-        Ball.Velocity = (Ball.Velocity + Vector(0, Physics_G) ) * (1-Physics_DAMPENING)
+        --Add g vector to balls velocity
+        Ball.Velocity = (Ball.Velocity + Physics_G) * (1-Physics_DAMPENING)
 
+        --update the balls position
         Ball.Position = Ball.Position + Ball.Velocity
 
-        local depth = Ball.Radius - ((Ball.Position - PlaneOrigin)*PlaneNormal)
+        --Get the distance to the ground plane
+        local distanceToPlane = Ball.Radius - ((Ball.Position - PlaneOrigin)*PlaneNormal)
 
-        if depth > 0 then
+        if distanceToPlane > 0 then
 
-            -- If inside ground, move up
-            Ball.Position = Ball.Position + (PlaneNormal * depth)
+            -- If under ground, move up
+            Ball.Position = Ball.Position + (PlaneNormal * distanceToPlane)
 
-            local VelocityAlongPlane = ((Ball.Velocity - PlaneNormal*(PlaneNormal*Ball.Velocity)) * (1-Physics_FRICTION))
-            local VelocityAlongPlaneNormal = -Physics_ELASTICITY*PlaneNormal*(PlaneNormal*Ball.Velocity)
+            local PlaneNormalDotVel = PlaneNormal*Ball.Velocity
 
+            --get the velocity along the plane in order to apply friction
+            local VelocityAlongPlane = ((Ball.Velocity - PlaneNormal*(PlaneNormalDotVel)) * (1-Physics_FRICTION))
+
+            --the velocity along the normal used to calculate the bounce
+            local VelocityAlongPlaneNormal = -Physics_ELASTICITY*PlaneNormal*(PlaneNormalDotVel)
+
+            --add the two vectors
             Ball.Velocity = VelocityAlongPlane + VelocityAlongPlaneNormal
 
         end
     end
 end
 
--- Draw a coloured rectangle.
+--no physics here, promise!
 function love.draw()
+    love.graphics.setBackgroundColor(5, 0, 0)
+    love.graphics.setColor(200, 200, 255)
+    love.graphics.print("By: Anton Gustavsson and Jesper Mathiason ©", 10, 10)
+    love.graphics.print("1, 2, 3 : different startPositions and startVelocities", 10, 30)
+    love.graphics.print("q, w, e : different plane slopes", 10, 50)
+    love.graphics.print("a, s, d : different ELASTICITY : " .. Physics_ELASTICITY, 10, 70)
+    love.graphics.print("z, x, c : different FRICTION : " .. Physics_FRICTION, 10, 90)
+
     love.graphics.translate(200, 600)
     love.graphics.scale(InverseMetersPerPixel, -InverseMetersPerPixel )
 
-    love.graphics.setColor(0, 100, 100)
-
     local LineVector =  (PlaneNormal:perpendicular() * 10000)
-
-    --print(LineVector)
 
     love.graphics.line(PlaneOrigin.x + LineVector.x, PlaneOrigin.y + LineVector.y, PlaneOrigin.x - LineVector.x, PlaneOrigin.y - LineVector.y)
 
     love.graphics.circle("fill", Ball.Position.x, Ball.Position.y, Ball.Radius, 32)
 end
 
+--handle key inputs, to setup diffrent scenarios
 function love.keypressed(key, isrepeat)
     if key == "escape" then
         love.event.quit()
@@ -106,8 +123,32 @@ function love.keypressed(key, isrepeat)
     end
 
      if key == "e" then
-        PlaneNormal = Vector(0.2, 1)
+        PlaneNormal = Vector(0.1, 1)
         PlaneNormal:normalize_inplace()
+    end
+
+    if key == "a" then--Default
+        Physics_ELASTICITY = 0.4
+    end
+
+    if key == "s" then
+        Physics_ELASTICITY = 1.0
+    end
+
+     if key == "d" then
+        Physics_ELASTICITY = 0.0
+    end
+
+    if key == "z" then--Default
+        Physics_FRICTION = 0.15
+    end
+
+    if key == "x" then
+        Physics_FRICTION = 0.8
+    end
+
+    if key == "c" then
+        Physics_FRICTION = 0.0
     end
 
     if key == "r" then
