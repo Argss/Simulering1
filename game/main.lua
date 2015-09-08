@@ -4,7 +4,8 @@ local PhysicsAcc = 0
 local Physics_DT = 1/60
 local Physics_G = -9.82
 local Physics_DAMPENING = 0.0
-local Physics_ELASTICITY = 1.0
+local Physics_ELASTICITY = 0.4
+local Physics_FRICTION = 0.5
 
 local LaunchVelocity = Vector(10, 0)
 local LaunchPosition = Vector(0, 600)
@@ -14,7 +15,7 @@ Ball.Position = Vector(0, 0)
 Ball.Velocity = Vector(0, 0)
 Ball.Radius = 8
 
-local PlaneNormal = Vector(0.1, 1)
+local PlaneNormal = Vector(0, 1)
 PlaneNormal:normalize_inplace()
 local PlaneOrigin = Vector(0, 100)
 
@@ -43,19 +44,18 @@ function love.update(dt)
 
         Ball.Position = Ball.Position + Ball.Velocity
 
-        --V = V - (1+Physics_ELASTICITY)*N*(N*V)
-
-        local n = PlaneNormal
-
-        local vrel = Ball.Velocity * PlaneNormal
-        local depth = Ball.Radius - ((Ball.Position - PlaneOrigin)*n)
+        local depth = Ball.Radius - ((Ball.Position - PlaneOrigin)*PlaneNormal)
 
         if depth > 0 then
 
             -- If inside ground, move up
-            Ball.Position = Ball.Position + (n * depth)
+            Ball.Position = Ball.Position + (PlaneNormal * depth)
 
-            Ball.Velocity = Ball.Velocity - (1+Physics_ELASTICITY)*PlaneNormal*(PlaneNormal*Ball.Velocity)
+            local VelocityAlongPlane = ((Ball.Velocity - PlaneNormal*(PlaneNormal*Ball.Velocity)) * Physics_FRICTION)
+            local VelocityAlongPlaneNormal = -Physics_ELASTICITY*PlaneNormal*(PlaneNormal*Ball.Velocity)
+
+            Ball.Velocity = VelocityAlongPlane + VelocityAlongPlaneNormal
+
         end
     end
 end
