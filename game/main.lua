@@ -52,8 +52,10 @@ function love.update(dt)
 
         if depth > 0 then
 
-            Ball.Velocity = Ball.Velocity - (1+Physics_ELASTICITY)*PlaneNormal*(PlaneNormal*Ball.Velocity)
+            -- If inside ground, move up
+            Ball.Position = Ball.Position + (n * depth)
 
+            Ball.Velocity = Ball.Velocity - (1+Physics_ELASTICITY)*PlaneNormal*(PlaneNormal*Ball.Velocity)
         end
     end
 end
