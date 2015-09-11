@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0EDA7F53-618E-4DB6-986B-E6B32FBD0ADA</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SpelFysik</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>3ddc415d-85c7-2048-9a3c-1205a64c818a</key>
+		<string>svn://svn.seriousgames.nu/henrik</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>kurser/spelfysik2015/CodeExamples/CodeExample_F4/xCode/SpelFysik.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>3ddc415d-85c7-2048-9a3c-1205a64c818a</key>
+		<string>../../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3ddc415d-85c7-2048-9a3c-1205a64c818a</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3ddc415d-85c7-2048-9a3c-1205a64c818a</string>
+			<key>IDESourceControlWCCName</key>
+			<string>nyttLiv</string>
+		</dict>
+	</array>
+</dict>
+</plist>
