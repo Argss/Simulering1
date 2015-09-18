@@ -21,6 +21,7 @@
 #include "examples/f4_springs/RestLengthSpring.h"
 #include "examples/f4_springs/BallCannon.h"*/
 
+#include "EmptyDemo.h"
 #include "SpringDemo.h"
 
 using namespace std;
@@ -32,7 +33,9 @@ using namespace std;
  */
 int main(int argc, char* argv[])
 {
+	
     DemoHandler::inst().addDemo(new SpringDemo());
+	DemoHandler::inst().addDemo(new EmptyDemo());
 
     
     start(argc,argv);//function in "OpenGLStuff"

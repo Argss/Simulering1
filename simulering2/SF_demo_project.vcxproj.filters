@@ -31,6 +31,7 @@
       <Filter>SF_src</Filter>
     </ClInclude>
     <ClInclude Include="SpringDemo.h" />
+    <ClInclude Include="EmptyDemo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SF_src\DemoHandler.cpp">
