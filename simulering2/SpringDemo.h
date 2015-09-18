@@ -43,7 +43,7 @@ public:
 	SpringDemo()
 	{
 		handler = new PhysicsHandler();
-		handler->STEP = 1.0 / 100.0;
+		handler->STEP = 1.0 / 60.0;
 
 		scenario_default();	
 	}
@@ -119,7 +119,7 @@ public:
 		{
 			for (int j = i; j < mBalls.size(); ++j)
 			{
-				mSprings.push_back({ mBalls[i], mBalls[j], (rand() % 6) + 2, (rand() % 2) + 2});
+				mSprings.push_back({ mBalls[i], mBalls[j], (Spring_RealNumber) ((rand() % 2) + 2), (Spring_RealNumber) ((rand() % 2) + 2) });
 			}
 		}
 
