@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ResourceCompile Include="sf.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="SF_src">
+      <UniqueIdentifier>{f472412e-733a-4d9b-8799-0aed91353382}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SF_src\Demo.h">
+      <Filter>SF_src</Filter>
+    </ClInclude>
+    <ClInclude Include="SF_src\DemoHandler.h">
+      <Filter>SF_src</Filter>
+    </ClInclude>
+    <ClInclude Include="SF_src\glut.h">
+      <Filter>SF_src</Filter>
+    </ClInclude>
+    <ClInclude Include="SF_src\MyMatrix.h">
+      <Filter>SF_src</Filter>
+    </ClInclude>
+    <ClInclude Include="SF_src\MyVector.h">
+      <Filter>SF_src</Filter>
+    </ClInclude>
+    <ClInclude Include="SF_src\OpenGLStuff.h">
+      <Filter>SF_src</Filter>
+    </ClInclude>
+    <ClInclude Include="SF_src\Point.h">
+      <Filter>SF_src</Filter>
+    </ClInclude>
+    <ClInclude Include="SpringDemo.h" />
+    <ClInclude Include="EmptyDemo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SF_src\DemoHandler.cpp">
+      <Filter>SF_src</Filter>
+    </ClCompile>
+    <ClCompile Include="SF_src\OpenGLStuff.cpp">
+      <Filter>SF_src</Filter>
+    </ClCompile>
+    <ClCompile Include="Start.cpp" />
+  </ItemGroup>
+</Project>
