@@ -103,6 +103,7 @@
     <ClInclude Include="SF_src\MyVector.h" />
     <ClInclude Include="SF_src\OpenGLStuff.h" />
     <ClInclude Include="SF_src\Point.h" />
+    <ClInclude Include="SpaceDemo.h" />
     <ClInclude Include="SpringDemo.h" />
   </ItemGroup>
   <ItemGroup>

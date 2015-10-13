@@ -23,6 +23,7 @@
 
 #include "EmptyDemo.h"
 #include "SpringDemo.h"
+#include "SpaceDemo.h"
 
 using namespace std;
 
@@ -34,8 +35,10 @@ using namespace std;
 int main(int argc, char* argv[])
 {
 	
-    DemoHandler::inst().addDemo(new SpringDemo());
+    //DemoHandler::inst().addDemo(new SpringDemo());
+	
 	DemoHandler::inst().addDemo(new EmptyDemo());
+	DemoHandler::inst().addDemo(new SpaceDemo());
 
     
     start(argc,argv);//function in "OpenGLStuff"
